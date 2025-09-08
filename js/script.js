@@ -6,13 +6,11 @@ const caixaPerguntas = document.querySelector(".caixa-perguntas");
 const caixaAlternativas = document.querySelector(".caixa-alternativas");
 const caixaResultado = document.querySelector(".caixa-resultado");
 const textoResultado = document.querySelector(".texto-resultado");
-
+const botaoJogarNovamente = document.querySelector(".novamente-btn");
 
 let atual = 0;
 let perguntaAtual;
 let historiaFinal = "";
-
-
 
 function mostraPergunta() {
     if (atual >= perguntas.length) {
@@ -21,7 +19,7 @@ function mostraPergunta() {
     }
     perguntaAtual = perguntas[atual];
     caixaPerguntas.textContent = perguntaAtual.enunciado;
-    caixaAlternativas.innerHTML = "";  // Limpa as alternativas antes de adicionar novas
+    caixaAlternativas.textContent = "";
     mostraAlternativas();
 }
 
@@ -42,10 +40,16 @@ function respostaSelecionada(opcaoSelecionada) {
 }
 
 function mostraResultado() {
-    caixaPerguntas.textContent = "Em 2049...";  // Um título para o resultado
+    caixaPerguntas.textContent = "Em 2049...";
     textoResultado.textContent = historiaFinal;
-    caixaAlternativas.innerHTML = "";  // Limpa as alternativas após o resultado
+    caixaAlternativas.textContent = "";
+    botaoJogarNovamente.addEventListener("click", jogaNovamente());
 }
 
+function jogaNovamente(){
+    atual = 0;
+    historiaFinal = "";
+    mostraPergunta();
+}
 
 mostraPergunta();
